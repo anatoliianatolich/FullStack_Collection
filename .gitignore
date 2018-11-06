@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+config.json*
+
+server/config/config.js
+server/connectDB/conn.js
+
