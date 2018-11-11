@@ -7,7 +7,8 @@ const registration = require("./method/registration");
 
 routers
     .get("/", mainPage)
-    // .post("/sign-in", authorization)
+    .get("/sign-in", authorization)
     .post("/sign-up", registration)
+    .post("/sign-up", authorizations);
 
 module.exports = routers;

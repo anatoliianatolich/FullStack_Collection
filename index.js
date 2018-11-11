@@ -1,8 +1,6 @@
 const server = require("./server/server");
-const connectDB = require("./server/connectDB/conn");
-
-const port = 5050;
-const db = "mongodb://Anatolich:test987654321@ds143893.mlab.com:43893/registration";
+const connect = require("./server/connectDB/connectDB");
+const {port} = require("./server/config/config");
 
 server(port);
-connectDB(db);
+connect();

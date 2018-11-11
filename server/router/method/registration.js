@@ -39,7 +39,7 @@ module.exports = (req, res, next) => {
             } else if (previousUsers > 0) {
                 return res.send({
                     success: false,
-                    message: 'Account: already exists'
+                    message: 'Email: already exists'
                 });
             }
         });
@@ -59,7 +59,7 @@ module.exports = (req, res, next) => {
         }
         return res.send({
             success: true,
-            message: 'Signed up'
+            message: `Signed up ${user}`
         });
     });
 }
