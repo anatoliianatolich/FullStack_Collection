@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     const {body} = req;
     const {password} = body;
     let {email, userName} = body;
-
+    console.log(email, userName, password);
     if (!email) {
         return res.send({
             success: false,
@@ -25,7 +25,7 @@ module.exports = (req, res, next) => {
         })
     }
     email = email.toLowerCase().trim();
-    userName = userName.toLowerCase().trim();
+    userName = userName.trim();
 
     Registration.find({
             email: email
@@ -59,7 +59,7 @@ module.exports = (req, res, next) => {
         }
         return res.send({
             success: true,
-            message: `Signed up ${user}`
+            message: `Signed up ${user.userName}`
         });
     });
 }
