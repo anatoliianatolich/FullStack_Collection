@@ -5,7 +5,7 @@ const routers = require("./router/routers");
 
 
 const server = port => {
-    console.log("server");
+
 app
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))

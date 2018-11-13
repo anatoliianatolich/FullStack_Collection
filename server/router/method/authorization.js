@@ -7,7 +7,7 @@ const User = require('../../connectDB/Schema/registration');
 const authorization = (req,res,next) => {
    if(!req.headers['x-auth']){
        res.status(401);
-       // здійснити переключення на форму з якої здійснити post запит на authorizasions
+
        return res.send("You need log in");
    }
    try {
