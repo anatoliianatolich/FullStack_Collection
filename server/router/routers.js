@@ -1,16 +1,17 @@
 const express = require("express");
-const routers = express.Router();
+const router = express.Router();
 const mainPage = require("./method/mainPage");
 const registration = require("./method/registration");
 const authorization = require("./method/authorization");
 const authorizations = require("./method/authorizations");
 
 
-routers
+router
     .get("/", mainPage)
-    .get("/sign-in", authorization)
-    .post("/sign-up", registration)
-    .post("/sign-in", authorizations)
+    .get("/users", mainPage)
+    // .get("/sign-in", authorization)
+    // .post("/sign-up", registration)
+    // .post("/sign-in", authorizations)
 
 
-module.exports = routers;
+module.exports = router;
