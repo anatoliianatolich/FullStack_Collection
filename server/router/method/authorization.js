@@ -18,7 +18,7 @@ const authorization = (req,res,next) => {
    User.findOne({userName: auth.username}), (err,user) => {
        console.log(user);
        if(err) return res.sendStatus(500);
-       else res.json(user);
+       res.json(user);
    }
 }
 

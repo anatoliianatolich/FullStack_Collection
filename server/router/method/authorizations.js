@@ -15,7 +15,7 @@ const authorizations = (req, res, next) => {
                 if(err) return res.sendStatus(500);
                 if(!user){return res.sendStatus(401)};
 
-                bcrypt.compare(password, user.password, (err, valid) => {
+                    bcrypt.compare(password, user.password, (err, valid) => {
                     console.log(valid);
                     if(err) {
                         return res.sendStatus(500)
@@ -23,7 +23,7 @@ const authorizations = (req, res, next) => {
                     console.log(2);
                     if (!valid){ return res.sendStatus(401)}
                     var token = jwt.encode({userName: userName}, config.secret);
-                    res.send(token);
+                    res.writeHead(200,{});
                 });
             })
     }

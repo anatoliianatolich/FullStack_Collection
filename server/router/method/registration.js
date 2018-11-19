@@ -1,4 +1,5 @@
 const Registration = require("../../connectDB/Schema/registration");
+const jwt = require('jwt-simple');
 
 
 module.exports = (req, res, next) => {
