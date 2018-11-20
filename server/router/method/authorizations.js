@@ -4,6 +4,7 @@ const User = require('../../connectDB/Schema/registration');
 const bcrypt = require("bcrypt");
 
 const authorizations = (req, res, next) => {
+    console.log(req.body);
     if(!req.body.userName || !req.body.password){
         return res.sendStatus(400);
     } else {
