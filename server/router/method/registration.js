@@ -4,10 +4,8 @@ const config = require('../../config/config')
 
 
 const registration = (req, res) => {
-    console.log(req);
     const {password} = req.body;
     let {email, userName} = req.body;
-    console.log(email, userName, password);
     if (!email) {
         return res.send(400,{
             success: false,
@@ -26,25 +24,9 @@ const registration = (req, res) => {
             message: 'Error: password cannot be blank'
         })
     }
+
     email = email.toLowerCase().trim();
     userName = userName.trim();
-
-    Registration.find({
-            email: email
-        },
-        (err, previousUsers) => {
-            if (err) {
-                return res.send({
-                    success: false,
-                    message: 'Server: error server'
-                })
-            } else if (previousUsers > 0) {
-                return res.send({
-                    success: false,
-                    message: 'Email: already exists'
-                });
-            }
-        });
 
     const newUser = new Registration();
 
@@ -52,7 +34,6 @@ const registration = (req, res) => {
     newUser.userName = userName;
     newUser.password = newUser.generateHash(password);
     const token1 = jwt.encode({userName: userName}, config.secret);
-    console.log(1);
     newUser.save((err, user) => {
         if (err){
             return res.send({
