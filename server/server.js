@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const router = require("./router/routers");
+const routers = require("./router/routers");
 
 
 const server = port => {
@@ -9,12 +9,13 @@ const server = port => {
 app
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))
-    .use("/", router)
+    .use("/", routers)
     .use(errorHandler)
     .listen(port, ()=> {
         console.log("server listen port" + port);
     });
 }
+
 
 const errorHandler = (err, req, res)  => {
     console.error(err.stack);

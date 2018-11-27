@@ -1,8 +1,12 @@
 const fs = require("fs");
 
 const mainPage = (req,res) => {
-    res.status(200);
-    res.json("hello");
+    console.log(req.headers);
+    fs.readFile("./layout/public/index.html", (err, data)=> {
+        if(err) throw err;
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(data);
+    })
 }
 
 module.exports = mainPage;

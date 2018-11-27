@@ -14,16 +14,13 @@ const authorizations = (req, res, next) => {
             .exec((err, user) => {
                 if(err) return res.sendStatus(500);
                 if(!user){return res.sendStatus(401)};
-
-                bcrypt.compare(password, user.password, (err, valid) => {
-                    console.log(valid);
+                    bcrypt.compare(password, user.password, (err, valid) => {
                     if(err) {
                         return res.sendStatus(500)
                     }
-                    console.log(2);
                     if (!valid){ return res.sendStatus(401)}
                     var token = jwt.encode({userName: userName}, config.secret);
-                    res.send(token);
+                    res.status(200).send({token: token});
                 });
             })
     }
