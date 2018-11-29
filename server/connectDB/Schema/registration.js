@@ -1,22 +1,20 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+mongoose.Promise = global.Promise;
 
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: true,
-        default: ''
+        required: true
     },
     userName: {
         type: String,
-        required: true,
-        default: ''
+        required: true
     },
     password: {
         type: String,
         select: false,
-        required: true,
-        default: ''
+        required: true
     },
     isDeleted: {
         type: Boolean,
@@ -25,6 +23,10 @@ const UserSchema = new mongoose.Schema({
     signUpDate: {
         type: Date,
         default: Date.now()
+    },
+    avatar: {
+        type: string,
+        default: null
     }
 });
 UserSchema.methods.generateHash = function(password) {
