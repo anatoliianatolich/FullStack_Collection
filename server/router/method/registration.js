@@ -6,7 +6,6 @@ const config = require('../../config/config')
 
 const registration = (req, res) => {
 
-    console.log("reg");
     const {password} = req.body;
     let {email, userName} = req.body;
 
@@ -28,6 +27,7 @@ const registration = (req, res) => {
             message: 'Error: password cannot be blank'
         })
     }
+
     email = email.toLowerCase().trim();
     userName = userName.trim();
 
@@ -36,7 +36,9 @@ const registration = (req, res) => {
     newUser.email = email;
     newUser.userName = userName;
     newUser.password = newUser.generateHash(password);
+
     const token = jwt.encode({userName: userName}, config.secret);
+
 
     newUser.save((err, user) => {
         if (err){

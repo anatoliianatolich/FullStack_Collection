@@ -1,11 +1,19 @@
-const users = require("../../../connectDB/Schema/registration");
+
+const Users = require("../../../connectDB/Schema/registration");
 
 module.exports = {
     async auditUser(req,res,next){
-        const {email} = req.body;
-        let user = await users.find({ email: email });
-        console.log(user); 
-        req.findUsr = true;
-        next();
+        let {email} = req.body;
+        Users.findOne({email:email})
+            .select('email')
+            .exec((err, docs) => {
+            if(err) next();
+        if(docs != null && docs.email === email){ 
+            return res.status(200).send("Email is already")
+        }
+        else{
+            next()
+        }
+        });
     }
 }

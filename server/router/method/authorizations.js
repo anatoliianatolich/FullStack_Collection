@@ -4,7 +4,6 @@ const User = require('../../connectDB/Schema/registration');
 const bcrypt = require("bcrypt");
 
 const authorizations = (req, res, next) => {
-    console.log(req.body);
     if(!req.body.userName || !req.body.password){
         return res.sendStatus(400);
     } else {
@@ -15,16 +14,13 @@ const authorizations = (req, res, next) => {
             .exec((err, user) => {
                 if(err) return res.sendStatus(500);
                 if(!user){return res.sendStatus(401)};
-
                     bcrypt.compare(password, user.password, (err, valid) => {
-                    console.log(valid);
                     if(err) {
                         return res.sendStatus(500)
                     }
-                    console.log(2);
                     if (!valid){ return res.sendStatus(401)}
                     var token = jwt.encode({userName: userName}, config.secret);
-                    res.writeHead(200,{});
+                    res.status(200).send({token: token});
                 });
             })
     }

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {DB} = require('../config/config');
+mongoose.Promise = global.Promise;
 
 const connect = () => {
     mongoose.connect(`${DB}`, { useNewUrlParser: true });
