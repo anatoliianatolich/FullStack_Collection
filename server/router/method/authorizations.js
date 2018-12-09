@@ -20,7 +20,7 @@ const authorizations = (req, res, next) => {
                     }
                     if (!valid){ return res.sendStatus(401)}
                     var token = jwt.encode({userName: userName}, config.secret);
-                    res.status(200).send({token: token});
+                    res.status(200).send({token: token, role: user.role});
                 });
             })
     }

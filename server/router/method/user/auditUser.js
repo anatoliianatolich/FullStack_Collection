@@ -1,7 +1,7 @@
+
 const Users = require("../../../connectDB/Schema/registration");
 
 module.exports = {
-    
     async auditUser(req,res,next){
         let {email} = req.body;
         Users.findOne({email:email})
@@ -16,5 +16,4 @@ module.exports = {
         }
         });
     }
-  
 }
