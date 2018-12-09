@@ -17,5 +17,5 @@ router
     .post("/sign-in", authorizations)
     .post("/testUser", auditUser)
     
-module.exports = routers;
+module.exports = router;
 

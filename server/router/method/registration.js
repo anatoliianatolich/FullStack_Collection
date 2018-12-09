@@ -48,17 +48,9 @@ const registration = (req, res) => {
             });
         }
         return (
-            res.writeHead(200, {
-                "success":`congratulation ${newUser.userName}`,
-                "email":"newUser.email",
-                ["Authorization"]: token
-            })
-
-            // res.status(200).send({
-            //     "success":`congratulation ${newUser.userName}`,
-            //     "email":newUser.email,
-            //     ["Authorization"]: token
-            // })
+            res.writeHead(201, {
+                ["x-auth"]: token
+            }).send({"userName": newUser.userName, "email": newUser.email, "role": "user"})
     );
     });
 }
