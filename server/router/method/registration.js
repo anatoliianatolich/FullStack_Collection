@@ -47,11 +47,18 @@ const registration = (req, res) => {
                 message: 'Error: Server error'
             });
         }
+    //     return (
+    //         res.writeHead(201, {
+    //             ["x-auth"]: token
+    //         }).end({"userName": newUser.userName, "email": newUser.email, "role": "user"})
+    // );
         return (
-            res.writeHead(201, {
-                ["x-auth"]: token
-            }).send({"userName": newUser.userName, "email": newUser.email, "role": "user"})
-    );
+            res.status(200).send({ 
+            "userName": newUser.userName, 
+            "email": newUser.email, 
+            "role": "user", 
+            "token": token})
+        );
     });
 }
 
