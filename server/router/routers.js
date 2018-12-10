@@ -3,7 +3,7 @@ const router = express.Router();
 const mainPage = require("./method/mainPage");
 const getUsers = require("./method/user/getUsers");
 const registration = require("./method/registration");
-const authorizations = require("./method/authorizations");
+const authorizations = require("./method/authorization");
 const {auditUser} = require("./method/user/auditUser");
 const admin = require("./controllers/admin")
 
@@ -14,7 +14,7 @@ router
     .get("/users", getUsers)
     .use("/admin", admin)
     .post("/sign-up", auditUser, registration)
-    .post("/sign-in", authorizations)
+    .post("/sign-in", authorization)
     .post("/testUser", auditUser)
     
 module.exports = router;
