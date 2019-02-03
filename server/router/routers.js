@@ -3,7 +3,7 @@ const router = express.Router();
 const mainPage = require("./method/mainPage");
 const getUsers = require("./method/user/getUsers");
 const registration = require("./method/registration");
-const authorizations = require("./method/authorization");
+const authorization = require("./method/authorization");
 const {auditUser} = require("./method/user/auditUser");
 const admin = require("./controllers/admin")
 
