@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 
-const Products = new mongoose.Schema({
+const ProductSchema = mongoose.Schema({
     name : {
         type: String,
         required: true
     }, 
-    prise: {
+    price: {
         type: Number,
         required: true
     },
@@ -19,4 +19,18 @@ const Products = new mongoose.Schema({
         default: Date.now
     },
     picture: Buffer
-  })
+  });
+
+const Product = mongoose.model('Product', ProductSchema);
+
+const newProduct = new Product({
+    name : "test",
+    price: 100,
+    status: 'true',
+    created: 'test'
+});
+
+newProduct.save((err)=> {
+    if(err) throw err;
+    console.log('write new product');
+});
