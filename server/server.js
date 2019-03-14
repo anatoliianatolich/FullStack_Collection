@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
-const io = require("socket.io");
+const io = require("socket.io")();
 
 const router = require("./router/routers");
 const {portSocket}= require("./config/config");
@@ -18,7 +18,14 @@ app
         console.log("server listen port" + port);
     });
 };
-
+io.on('conection', (client)=> {
+    client.on('subscribeToTimer', (interval)=> {
+        console.log(" client is interval listen in ",interval);
+        setInterval(()=> {
+            client.emit('timer', new Date());
+        }, interval)
+    })
+})
 
 io.listen(portSocket);
 console.log('listening on port ', portSocket);
