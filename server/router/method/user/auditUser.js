@@ -1,5 +1,5 @@
 
-const Users = require("../../../connectDB/Schema/registration");
+const Users = require("../../../connectDB/Schema/user");
 
 module.exports = {
     async auditUser(req,res,next){

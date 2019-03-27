@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const {Schema} = mongoose;
 const bcrypt = require('bcrypt');
 mongoose.Promise = global.Promise;
 
-const UserSchema = new mongoose.Schema({
+//const UserSchema = new mongoose.Schema() - альтернативний варіант
+const UserSchema = new Schema({
     email: {
         type: String,
         required: true
@@ -24,6 +26,10 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    remove: {
+      type: Date,
+      default: Date.now()
+    },
     role: {
         type: String,
         default: 'user'
@@ -39,4 +45,5 @@ UserSchema.methods.generateHash = function(password) {
 UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
+
 module.exports = mongoose.model('User', UserSchema);

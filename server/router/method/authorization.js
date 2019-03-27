@@ -1,6 +1,6 @@
 const config = require('../../config/config');
 const jwt = require('jwt-simple');
-const User = require('../../connectDB/Schema/registration');
+const User = require('../../connectDB/Schema/user');
 const bcrypt = require("bcrypt");
 
 const authorizations = (req, res, next) => {

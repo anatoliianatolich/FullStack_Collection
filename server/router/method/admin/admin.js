@@ -1,6 +1,6 @@
 
 
-const users = require("../../../connectDB/Schema/registration");
+const users = require("../../../connectDB/Schema/user");
 const bcrypt = require("bcrypt");
 
 const fs = require("fs");

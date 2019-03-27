@@ -1,4 +1,4 @@
-const User = require("../../../connectDB/Schema/registration")
+const User = require("../../../connectDB/Schema/user")
 
 const getUsers = (req,res) => {
 
