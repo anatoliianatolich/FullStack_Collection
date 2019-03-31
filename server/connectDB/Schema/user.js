@@ -26,7 +26,7 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    remove: {
+    update: {
       type: Date,
       default: Date.now()
     },

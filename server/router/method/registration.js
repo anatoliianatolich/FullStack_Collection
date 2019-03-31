@@ -1,4 +1,4 @@
-const users = require("../../connectDB/Schema/user");
+const User = require("../../connectDB/Schema/user");
 const jwt = require('jwt-simple');
 const config = require('../../config/config')
 
@@ -31,7 +31,7 @@ const registration = (req, res) => {
     email = email.toLowerCase().trim();
     userName = userName.trim();
 
-    const newUser = new users();
+    const newUser = new User();
 
     newUser.email = email;
     newUser.userName = userName;

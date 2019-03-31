@@ -25,17 +25,5 @@ const TaskSchema = mongoose.Schema({
     }
 });
 console.log(1);
-const Tasks = mongoose.model('Tasks', TaskSchema);
+module.exports = mongoose.model('Tasks', TaskSchema);
 
-const createTasks = new Tasks({
-    user: 'test',
-    title: 'test',
-    description: 'test',
-    deadline: '2019-03-15T07:26:20.510Z',
-    reminder: '2019-03-14T07:26:20.510Z'
-});
-
-createTasks.save((err)=> {
-    if(err) throw err;
-    console.log('success write task in DB');
-});
