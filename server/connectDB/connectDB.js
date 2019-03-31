@@ -3,7 +3,6 @@ const {DB} = require('../config/config');
 mongoose.Promise = global.Promise;
 
 const connect = () => {
-    console.log(DB);
     mongoose.connect(`${DB}`, { useNewUrlParser: true });
     const db = mongoose.connection;
     db.on('error', ()=> {

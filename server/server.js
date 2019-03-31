@@ -32,6 +32,7 @@ io.listen(portSocket);
 console.log('listening on port ', portSocket);
 
 // const errorHandler = (err, req, res)  => {
+
 //     console.error(err.stack);
 //     res.json(500).send('Something broke!');
 // };

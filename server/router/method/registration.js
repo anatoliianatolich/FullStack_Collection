@@ -1,4 +1,4 @@
-const users = require("../../connectDB/Schema/registration");
+const users = require("../../connectDB/Schema/user");
 const jwt = require('jwt-simple');
 const config = require('../../config/config')
 
@@ -62,4 +62,4 @@ const registration = (req, res) => {
     });
 }
 
-module.exports = registration;
+module.exports = registration

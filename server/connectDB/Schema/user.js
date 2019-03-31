@@ -1,30 +1,49 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const {Schema} = mongoose;
+const bcrypt = require('bcrypt');
+mongoose.Promise = global.Promise;
 
-//CREATE SCHEMA
+//const UserSchema = new mongoose.Schema() - альтернативний варіант
 const UserSchema = new Schema({
-    password: {
-        type: String
-    },
-
-    googleID: {
-        type: String
-    },
-    name: {
-        type: String,
-    },
     email: {
         type: String,
         required: true
     },
-    date: {
+    userName: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        select: false,
+        required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    signUpDate: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
-    image: {
-        type: String
+    remove: {
+      type: Date,
+      default: Date.now()
     },
-
+    role: {
+        type: String,
+        default: 'user'
+    },
+    avatar: {
+        type: String,
+        default: null
+    }
 });
+UserSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+UserSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
-mongoose.model("users", UserSchema);
+module.exports = mongoose.model('User', UserSchema);
