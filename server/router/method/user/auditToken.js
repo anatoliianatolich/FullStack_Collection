@@ -1,6 +1,6 @@
-const config = require('../../config/config');
-const jwt = require('jwt-simple');
-const User = require('../../connectDB/Schema/user');
+const config = require('../../../config/config');
+const jwt = require('jwt-simple/index');
+const User = require('../../../connectDB/Schema/user');
 
 
 

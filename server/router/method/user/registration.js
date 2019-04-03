@@ -1,10 +1,10 @@
-const User = require("../../connectDB/Schema/user");
-const jwt = require('jwt-simple');
-const config = require('../../config/config')
+const User = require("../../../connectDB/Schema/user");
+const jwt = require('jwt-simple/index');
+const config = require('../../../config/config');
 
 
 
-const registration = (req, res) => {
+const registration = (req, res, next) => {
 
     const {password} = req.body;
     let {email, userName} = req.body;
@@ -47,11 +47,7 @@ const registration = (req, res) => {
                 message: 'Error: Server error'
             });
         }
-    //     return (
-    //         res.writeHead(201, {
-    //             ["x-auth"]: token
-    //         }).end({"userName": newUser.userName, "email": newUser.email, "role": "user"})
-    // );
+
         return (
             res.status(200).send({ 
             "userName": newUser.userName, 
