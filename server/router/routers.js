@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const handlerUser = require("./controllers/handlerUser");
+const authenticated = require('./method/authenticated')
 // const mainPage = require("./method/mainPage");
 // const getUsers = require("./method/user/getUsers");
 // const registration = require("./method/registration");
@@ -17,8 +19,8 @@ router
     // .post("/sign-in", authorization)
     // .post("/testUser", auditUser)
     .use('/auth', handlerUser)
-    .use('/task', handlerTask)
+    // .use("/", authenticated)
+    // .use('/task', handlerTask)
 
-    
 module.exports = router;
 

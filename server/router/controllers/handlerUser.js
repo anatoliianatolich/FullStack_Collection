@@ -3,10 +3,10 @@ const handlerUser = express.Router();
 
 const registration = require("../method/user/registration");
 const authorization = require("../method/user/authorization");
-
+const authenticated = require("../method/authenticated")
 
 handlerUser
-    .post('/register', registration, authorization)
-    .post('/auth', authorization)
+    .post('/register', registration, authenticated)
+    .post('/auth', authorization, authenticated)
 
 module.exports = handlerUser;

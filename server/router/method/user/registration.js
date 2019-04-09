@@ -1,11 +1,8 @@
 const User = require("../../../connectDB/Schema/user");
-const jwt = require('jwt-simple/index');
-const config = require('../../../config/config');
-
-
+const jwt = require('jsonwebtoken');
 
 const registration = (req, res, next) => {
-
+    console.log(req.body);
     const {password} = req.body;
     let {email, userName} = req.body;
 
@@ -37,9 +34,6 @@ const registration = (req, res, next) => {
     newUser.userName = userName;
     newUser.password = newUser.generateHash(password);
 
-    const token = jwt.encode({userName: userName}, config.secret);
-
-
     newUser.save((err, user) => {
         if (err){
             return res.send({
@@ -47,14 +41,9 @@ const registration = (req, res, next) => {
                 message: 'Error: Server error'
             });
         }
-
-        return (
-            res.status(200).send({ 
-            "userName": newUser.userName, 
-            "email": newUser.email, 
-            "role": "user", 
-            "token": token})
-        );
+        console.log(user)
+        req.dataUser = {user, "token": token},
+        next();
     });
 }
 

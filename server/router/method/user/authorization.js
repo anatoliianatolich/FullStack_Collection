@@ -1,5 +1,5 @@
 const config = require('../../../config/config');
-const jwt = require('jwt-simple/index');
+const jwt = require('jsonwebtoken');
 const User = require('../../../connectDB/Schema/user');
 const bcrypt = require("bcrypt");
 
@@ -10,7 +10,7 @@ const authorizations = (req, res, next) => {
         let { email, password} = req.body;
 
         User.findOne({ email: email})
-            .select('password')
+            .select('user','email', 'password')
             .exec((err, user) => {
                 if(err) return res.sendStatus(500);
                 if(!user){return res.sendStatus(401)};
@@ -19,11 +19,12 @@ const authorizations = (req, res, next) => {
                         return res.sendStatus(500)
                     }
                     if (!valid){ return res.sendStatus(401)}
-                        var token = jwt.encode({ email: email}, config.secret);
-                    res.status(200).send({token: token, role: user.role});
+                    req.user = user;
+                    next()
                 });
             })
     }
+    next();
 }
 
 module.exports = authorizations;
