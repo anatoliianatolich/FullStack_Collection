@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
-const io = require("socket.io")();
+// const io = require("socket.io")();
 
 const router = require("./router/routers");
 const {portSocket}= require("./config/config");
@@ -10,10 +11,16 @@ const {portSocket}= require("./config/config");
 // const addError = require("./util/addError");
 
 
+const log = (req, res, next) => {
+    console.log(req.url, req.method, `${Date.now()}`);
+    next();
+}
 
 const server = port => {
 
 app
+    .use(cors())
+    .use(log)
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))
     .use(router)
