@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const registration = (req, res, next) => {
     console.log(req.body);
     const {password} = req.body;
-    let {email, userName} = req.body;
+    let {email, name} = req.body;
 
     if (!email) {
         return res.send(400,{
@@ -12,7 +12,7 @@ const registration = (req, res, next) => {
             message: 'Error: Email cannot be blank'
         })
     }
-    if (!userName) {
+    if (!name) {
         return res.send(400,{
             success: false,
             message: 'Error: userName cannot be blank'
@@ -26,12 +26,12 @@ const registration = (req, res, next) => {
     }
 
     email = email.toLowerCase().trim();
-    userName = userName.trim();
+    name = name.trim();
 
     const newUser = new User();
 
     newUser.email = email;
-    newUser.userName = userName;
+    newUser.name = name;
     newUser.password = newUser.generateHash(password);
 
     newUser.save((err, user) => {
@@ -41,8 +41,8 @@ const registration = (req, res, next) => {
                 message: 'Error: Server error'
             });
         }
-        console.log(user)
-        req.dataUser = {user, "token": token},
+        console.log(user);
+        req.dataUser = user;
         next();
     });
 }
