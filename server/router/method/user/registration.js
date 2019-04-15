@@ -1,8 +1,6 @@
 const User = require("../../../connectDB/Schema/user");
-const jwt = require('jsonwebtoken');
 
 const registration = (req, res, next) => {
-    console.log(req.body);
     const {password} = req.body;
     let {email, name} = req.body;
 
@@ -41,7 +39,7 @@ const registration = (req, res, next) => {
                 message: 'Error: Server error'
             });
         }
-        console.log(user);
+        // console.log(user);
         req.dataUser = user;
         next();
     });

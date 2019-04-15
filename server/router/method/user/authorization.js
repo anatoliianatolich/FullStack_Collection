@@ -15,6 +15,7 @@ const authorizations = (req, res, next) => {
             .select('user')
             .select('email')
             .select('password')
+            .lean()
             .exec((err, user) => {
                 console.log(user);
                 if(err) return res.sendStatus(500);
@@ -27,6 +28,8 @@ const authorizations = (req, res, next) => {
 
                     }
                     if (!valid) return res.sendStatus(401);
+                    console.log(typeof user);
+
                     req.dataUser = user;
                     res.writeHead(200, {"content-type":"application/json"}).send(user);
                     // next()
