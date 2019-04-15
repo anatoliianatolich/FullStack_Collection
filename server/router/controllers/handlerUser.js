@@ -7,6 +7,6 @@ const authenticated = require("../method/authenticated")
 
 handlerUser
     .post('/register', registration, authenticated)
-    .post('/local/login', authorization)
+    .post('/local/login', authorization, authenticated)
 
 module.exports = handlerUser;

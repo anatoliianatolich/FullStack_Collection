@@ -1,18 +1,20 @@
-const config = require('../../../config/config');
 const User = require('../../../connectDB/Schema/user');
 const bcrypt = require("bcrypt");
+const { secret } = require("../../../config/config");
 
 const authorizations = (req, res, next) => {
     console.log(req.body);
+    console.log(secret);
+
     if(!req.body.email || !req.body.password){
         return res.sendStatus(400);
     } else {
         let { email, password } = req.body;
 
         User.findOne({ email: email})
-            // .select('user')
-            // .select('email')
-            // .select('password')
+            .select('user')
+            .select('email')
+            .select('password')
             .exec((err, user) => {
                 console.log(user);
                 if(err) return res.sendStatus(500);
@@ -24,8 +26,8 @@ const authorizations = (req, res, next) => {
                         return res.sendStatus(500)
 
                     }
-                    if (!valid){ return res.sendStatus(401)}
-                    req.user = user;
+                    if (!valid) return res.sendStatus(401);
+                    req.dataUser = user;
                     res.writeHead(200, {"content-type":"application/json"}).send(user);
                     // next()
                 });

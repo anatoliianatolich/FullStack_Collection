@@ -13,11 +13,6 @@ const authenticated = require('./method/authenticated')
 
 router
     // .get("/", mainPage)
-    // .get("/users", getUsers)
-    // .use("/admin", admin)
-    // .post("/sign-up", auditUser, registration)
-    // .post("/sign-in", authorization)
-    // .post("/testUser", auditUser)
     .use('/auth', handlerUser)
     // .use("/", authenticated)
     // .use('/task', handlerTask)

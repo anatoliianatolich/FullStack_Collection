@@ -1,9 +1,9 @@
 const jsonwebtoken = require("jsonwebtoken");
-const ENV = "secret";
+const { secret } = require("../../config/config");
 
 module.exports = (req, res) => {
-    let {user} = req.body;
-    const token  = jsonwebtoken.sign(req, ENV, {expiresIn: '72h'});
+    let {user} = req.dataUser;
+    const token  = jsonwebtoken.sign(req, secret, {expiresIn: '72h'});
 
     user.token = token;
     console.log(user);
