@@ -39,8 +39,15 @@ const registration = (req, res, next) => {
                 message: 'Error: Server error'
             });
         }
+
         // console.log(user);
-        req.dataUser = user;
+        let dataUser = {};
+        for (let key in user){
+            let arrAudit = ["name", "email", "password"]
+            if (arrAudit.includes(key)) dataUser[key] = user[key];
+        }
+        console.log(dataUser)
+        req.dataUser = dataUser;
         next();
     });
 }

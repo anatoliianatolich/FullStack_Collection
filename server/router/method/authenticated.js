@@ -3,13 +3,12 @@ const { secret } = require("../../config/config");
 
 module.exports = (req, res) => {
 
-    let {user:{name, email, password}} = req.dataUser;
+
     console.log(secret);
-    console.log("user", user);
-
-
-    const token  = jsonwebtoken.sign(req, secret, {expiresIn: '72h'});
+    console.log("user",  req.dataUser);
+    let user = req.dataUser;
+    const token  = jsonwebtoken.sign(req.dataUser, secret, {expiresIn: '72h'});
     user.token = token;
     console.log(5);
-    res.status(200).send("user");
+    res.status(200).send(user);
 }
