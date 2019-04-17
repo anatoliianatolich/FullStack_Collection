@@ -2,6 +2,9 @@ const User = require('../../../connectDB/Schema/user');
 const bcrypt = require("bcrypt");
 const { secret } = require("../../../config/config");
 
+
+const auditObj = require("../../../helper/constructObject")
+
 const authorizations = (req, res, next) => {
     console.log(req.body);
     console.log(secret);
@@ -12,14 +15,14 @@ const authorizations = (req, res, next) => {
         let { email, password } = req.body;
 
         User.findOne({ email: email})
-            .select('user')
-            .select('email')
-            .select('password')
-            .lean()
+            // .select('name')
+            // .select('email')
+            // .select('password')
             .exec((err, user) => {
-                console.log(user);
+                // delete user[_id];
+                const result = auditObj(user);
+                console.log(result);
                 if(err) return res.sendStatus(500);
-                console.log(user);
                 if(!user){return res.sendStatus(401)};
                     bcrypt.compare(password, user.password, (err, valid) => {
                     if(err) {
@@ -29,10 +32,9 @@ const authorizations = (req, res, next) => {
                     }
                     if (!valid) return res.sendStatus(401);
                     console.log(typeof user);
-
                     req.dataUser = user;
-                    res.writeHead(200, {"content-type":"application/json"}).send(user);
-                    // next()
+                    // res.writeHead(200, {"content-type":"application/json"}).send(user);
+                    next()
                 });
             })
     }
