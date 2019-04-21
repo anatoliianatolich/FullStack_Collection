@@ -14,7 +14,7 @@ const authenticated = require('./method/authenticated')
 router
     // .get("/", mainPage)
     .use('/auth', handlerUser)
-    // .use("/", authenticated)
+    .use("/", authenticated)
     // .use('/task', handlerTask)
 
 module.exports = router;
