@@ -1,13 +1,10 @@
 const User = require('../../../connectDB/Schema/user');
 const bcrypt = require("bcrypt");
-const { secret } = require("../../../config/config");
 
-
-const auditObj = require("../../../helper/constructObject")
+const {CreateUser} = require("../../../helper/constructObject")
 
 const authorizations = (req, res, next) => {
     console.log(req.body);
-    console.log(secret);
 
     if(!req.body.email || !req.body.password){
         return res.sendStatus(400);
@@ -15,30 +12,28 @@ const authorizations = (req, res, next) => {
         let { email, password } = req.body;
 
         User.findOne({ email: email})
-            // .select('name')
-            // .select('email')
-            // .select('password')
+        .select('name')
+        .select('email')
+        .select('password')
             .exec((err, user) => {
-                // delete user[_id];
-                const result = auditObj(user);
-                console.log(result);
+                const result = CreateUser(user);
+                console.log("module auditObject", result);
                 if(err) return res.sendStatus(500);
-                if(!user){return res.sendStatus(401)};
-                    bcrypt.compare(password, user.password, (err, valid) => {
+                if(!result){return res.sendStatus(401)};
+
+                bcrypt.compare(password, result.password, (err, valid) => {
                     if(err) {
                         console.log("не пройшов валідацію");
-                        return res.sendStatus(500)
+                        return res.sendStatus(500);
 
                     }
+                    console.log(valid)
                     if (!valid) return res.sendStatus(401);
-                    console.log(typeof user);
-                    req.dataUser = user;
-                    // res.writeHead(200, {"content-type":"application/json"}).send(user);
+                    req.dataUser = result;
                     next()
                 });
             })
     }
-    next();
 }
 
 module.exports = authorizations;

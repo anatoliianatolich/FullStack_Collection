@@ -67,4 +67,4 @@ config.json*
 server/config/config.js
 server/connectDB/conn.js
 layout/
-
+server/test

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const bcrypt = require('bcrypt');
-mongoose.Promise = global.Promise;
 
 //const UserSchema = new mongoose.Schema() - альтернативний варіант
 const UserSchema = new Schema({

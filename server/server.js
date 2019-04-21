@@ -7,9 +7,8 @@ const cors = require("cors");
 
 const router = require("./router/routers");
 const {portSocket}= require("./config/config");
-// const handlerError = require("./util/handlerError");
-// const addError = require("./util/addError");
-
+const handlerError = require("./util/handlerError");
+const addError = require("./util/addError");
 
 const log = (req, res, next) => {
     console.log(req.url, req.method, `${Date.now()}`);
@@ -24,7 +23,7 @@ app
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))
     .use(router)
-    // .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
+    .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
 
 app.listen(port, ()=> {
     console.log("server listen port" + port);
