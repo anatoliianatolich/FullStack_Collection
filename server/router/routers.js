@@ -12,9 +12,9 @@ const authenticated = require('./method/authenticated')
 // const audit = require("../router/method/user/auditUser");
 
 router
-    // .get("/", mainPage)
     .use('/auth', handlerUser)
     .use("/", authenticated)
+    .get('/test',((req,res)=>{res.send("good")}))
     // .use('/task', handlerTask)
 
 module.exports = router;
