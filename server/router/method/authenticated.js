@@ -18,7 +18,8 @@ module.exports = (req, res) => {
         res.status(200).send({"info":"Successful", "dataUser":filterUser});
     }
     else{
-        console.log("audit authorization", req.headers.Authorization);
+        console.log("audit authorization", req.Headers);
+        console.log(10)
         const token = req.headers.Authorization.split(' ')[1];
         JWT.verify(token, secret, (err, decode) => {
             if(err) return res.status(200).send("audit authorization", err);
