@@ -9,12 +9,15 @@ const authenticated = require('./method/authenticated')
 // const {auditUser} = require("./method/user/auditUser");
 // const admin = require("./controllers/admin")
 
-// const audit = require("../router/method/user/auditUser");
-
 router
-    // .get("/", mainPage)
     .use('/auth', handlerUser)
-    // .use("/", authenticated)
+    .get('/test',((req,res)=>{
+        console.log(req.headers);
+        res.send("good")}))
+    .use("/", authenticated)
+
+
+// const audit = require("../router/method/user/auditUser");
     // .use('/task', handlerTask)
 
 module.exports = router;

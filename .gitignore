@@ -63,8 +63,7 @@ typings/
 .next
 
 config.json*
-
-server/config/config.js
+config/
 server/connectDB/conn.js
 layout/
 server/test
