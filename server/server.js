@@ -40,5 +40,8 @@ app.listen(port, ()=> {
 //
 // io.listen(portSocket);
 // console.log('listening on port ', portSocket);
+// curl --url https://localhost:5050/test
+// curl --url https://localhost:5050/test -v
+// curl --url https://localhost:5050/test -v -k
 
 module.exports = server;
