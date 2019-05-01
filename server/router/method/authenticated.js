@@ -3,7 +3,7 @@ const { secret } = require("../../config/config");
 const {DeletePassUser} = require("../../helper/constructObject");
 const User = require("../../connectDB/Schema/user");
 
-module.exports = (req, res) => {
+module.exports = (req, res, next) => {
 
     console.log("module authenticated");
     console.log("user",  req.dataUser);
@@ -18,20 +18,24 @@ module.exports = (req, res) => {
         res.status(200).send({"info":"Successful", "dataUser":filterUser});
     }
     else{
-        console.log("audit authorization", req.Headers);
-        console.log(10)
-        const token = req.headers.Authorization.split(' ')[1];
+        console.log("audit authorization");
+        const token = req.headers.authorization.split(' ')[1];
         JWT.verify(token, secret, (err, decode) => {
             if(err) return res.status(200).send("audit authorization", err);
             const {email, password} = decode;
-            User.findOne({email: email}, (err, data) => {
-                const dataPass = data.password;
-                if(dataPass === password){}
+            console.log(decode);
+            User.findOne({email: email})
+                .select("password")
+                .exec((err, data) => {
+                    const dataPass = data.password;
+                    if(dataPass === password){
+                        // res.status(200).end(email);
+                        // req.dataUser = decode;
+                        next();
                     }
+                    else {res.status(200).send("err pass or email")}
+                }
             )
-
-            res.status(200).send("audit authorization");
         })
-
     }
 }
