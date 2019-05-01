@@ -4,7 +4,7 @@ const fs = require("fs");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const bearerToken = require("express-bearer-token");
+// const bearerToken = require("express-bearer-token");
 // const io = require("socket.io")();
 
 const router = require("./router/routers");
@@ -22,8 +22,8 @@ const server = port => {
 app
     .use(cors())
     .use(log)
-    // .use(bearerToken)
-    .use(bodyParser.json())
+    // .use(bearerToken())
+    // .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))
     .use(router)
     .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази

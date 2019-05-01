@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 const UserSchema = new Schema({
     email: {
         type: String,
+        lowercase: true,
+        trim: true,
+        unique:true,
         required: true
     },
     name: {
@@ -36,7 +39,11 @@ const UserSchema = new Schema({
     avatar: {
         type: String,
         default: null
-    }
+    },
+    task: [{
+        type: Schema.Types.ObjectId,
+        ref: "task"
+    }]
 });
 UserSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
