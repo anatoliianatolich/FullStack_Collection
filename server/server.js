@@ -22,8 +22,7 @@ const server = port => {
 app
     .use(cors())
     .use(log)
-    // .use(bearerToken())
-    // .use(bodyParser.json())
+    .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))
     .use(router)
     .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
@@ -49,5 +48,9 @@ https.createServer({
 //
 // io.listen(portSocket);
 // console.log('listening on port ', portSocket);
+
+// curl --url https://localhost:5050/test
+// curl --url https://localhost:5050/test -v
+// curl --url https://localhost:5050/test -v -k
 
 module.exports = server;

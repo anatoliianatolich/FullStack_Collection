@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 const TaskSchema = new Schema({
-    user: {
-        type:Schema.Types.ObjectId,
-        ref:'users',
-    },
+    _id: mongoose.Schema.Types.ObjectId,
     title: {
         type: String,
         required: true
@@ -25,5 +22,5 @@ const TaskSchema = new Schema({
         type: Date
     }
 });
-module.exports = mongoose.model('Task', TaskSchema);
+module.exports = mongoose.model('Task', TaskSchema, 'tasks');
 

@@ -4,12 +4,11 @@ const bcrypt = require('bcrypt');
 
 //const UserSchema = new mongoose.Schema() - альтернативний варіант
 const UserSchema = new Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     email: {
         type: String,
-        lowercase: true,
-        trim: true,
         unique:true,
-        required: true
+        required: true,
     },
     name: {
         type: String,
@@ -40,9 +39,10 @@ const UserSchema = new Schema({
         type: String,
         default: null
     },
+    pictureProfile: Buffer,
     task: [{
         type: Schema.Types.ObjectId,
-        ref: "task"
+        ref: "Task"
     }]
 });
 UserSchema.methods.generateHash = function(password) {
@@ -52,4 +52,4 @@ UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema, 'users');
