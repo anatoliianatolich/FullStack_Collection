@@ -19,6 +19,7 @@ module.exports = (req, res, next) => {
     }
     else{
         console.log("audit authorization");
+        console.log(req.headers.authorization);
         const token = req.headers.authorization.split(' ')[1];
         JWT.verify(token, secret, (err, decode) => {
             if(err) return res.status(200).send("audit authorization", err);
@@ -30,7 +31,7 @@ module.exports = (req, res, next) => {
                     const dataPass = data.password;
                     if(dataPass === password){
                         // res.status(200).end(email);
-                        // req.dataUser = decode;
+                        req.dataUser = decode;
                         next();
                     }
                     else {res.status(200).send("err pass or email")}

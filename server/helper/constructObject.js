@@ -1,7 +1,7 @@
 module.exports.CreateUser = (user) => {
     let dataUser = {};
     for (let key in user){
-        let arrAudit = ["name", "email", "password"]
+        let arrAudit = ["name", "email", "password","_id"]
         if (arrAudit.includes(key)) dataUser[key] = user[key];
     }
 
