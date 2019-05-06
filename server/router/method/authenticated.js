@@ -30,8 +30,8 @@ module.exports = (req, res, next) => {
                 .exec((err, data) => {
                     const dataPass = data.password;
                     if(dataPass === password){
-                        // res.status(200).end(email);
                         req.dataUser = decode;
+                        console.log(1)
                         next();
                     }
                     else {res.status(200).send("err pass or email")}

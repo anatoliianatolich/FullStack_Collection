@@ -36,7 +36,7 @@ const registration = (req, res, next) => {
         if (err){
             return res.send({
                 success: false,
-                message: 'Error: Server error'
+                message: 'Error: Server error1'
             });
         }
 
