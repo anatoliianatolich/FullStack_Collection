@@ -1,14 +1,14 @@
-const https = require('https');
+// const https = require('https');
 const express = require("express");
-const fs = require("fs");
+// const fs = require("fs");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 // const bearerToken = require("express-bearer-token");
-// const io = require("socket.io")();
+const io = require("socket.io")();
 
 const router = require("./router/routers");
-// const {portSocket}= require("./config/config");
+const {portSocket}= require("./config/config");
 const handlerError = require("./util/handlerError");
 const addError = require("./util/addError");
 
@@ -18,36 +18,44 @@ const log = (req, res, next) => {
 }
 
 const server = port => {
+    const corsOptions = {
+        origin: 'http://localhost:3000',
+        optionsSuccessStatus: 200
+    }
+    app
+        .use(cors(corsOptions))
+        .use(log)
+        .use(bodyParser.json())
+        .use(bodyParser.urlencoded({extended: true}))
+        .use(router)
+        // .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
 
-app
-    .use(cors())
-    .use(log)
-    .use(bodyParser.json())
-    .use(bodyParser.urlencoded({extended: true}))
-    .use(router)
-    .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
+    app.listen(port, () => {
+        console.log('url: http//localhost:', port)
+    })
 
 
-https.createServer({
-        key: fs.readFileSync("server/config/ssl_key/server.key"),
-        cert: fs.readFileSync("server/config/ssl_key/server.cert")
-
-    }, app).listen(port, () => {
-            console.log('url: https//localhost:',port);
-        }
-    )
-};
-// io.on('conection', (client)=> {
-//     client.on('subscribeToTimer', (interval)=> {
-//         console.log(" client is interval listen in ",interval);
-//         setInterval(()=> {
-//             client.emit('timer', new Date());
-//         }, interval)
-//     })
-// })
+// https.createServer({
+//         key: fs.readFileSync("server/config/ssl_key/server.key"),
+//         cert: fs.readFileSync("server/config/ssl_key/server.cert")
 //
-// io.listen(portSocket);
-// console.log('listening on port ', portSocket);
+//     }, app).listen(port, () => {
+//             console.log('url: https//localhost:',port);
+//         }
+//     )
+};
+
+io.on('conection', (client)=> {
+    client.on('subscribeToTimer', (interval)=> {
+        console.log(" client is interval listen in ",interval);
+        setInterval(()=> {
+            client.emit('timer', new Date());
+        }, interval)
+    })
+})
+
+io.listen(portSocket);
+console.log('listening on port ', portSocket);
 
 // curl --url https://localhost:5050/test
 // curl --url https://localhost:5050/test -v
