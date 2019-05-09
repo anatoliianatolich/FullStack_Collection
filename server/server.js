@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 // const bearerToken = require("express-bearer-token");
-const io = require("socket.io")();
+const io = require("socket.io")(app);
 
 const router = require("./router/routers");
 const {portSocket}= require("./config/config");
@@ -28,7 +28,7 @@ const server = port => {
         .use(bodyParser.json())
         .use(bodyParser.urlencoded({extended: true}))
         .use(router)
-        // .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
+        .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
 
     app.listen(port, () => {
         console.log('url: http//localhost:', port)
@@ -45,17 +45,33 @@ const server = port => {
 //     )
 };
 
+// io.on('conection', (client)=> {
+//     client.on('subscribeToTimer', ()=> {
+//         console.log(" client is interval listen in ",1000);
+//         setInterval(()=> {
+//             client.emit('timer', new Date());
+//         }, 1000)
+//     })
+// });
 io.on('conection', (client)=> {
-    client.on('subscribeToTimer', (interval)=> {
-        console.log(" client is interval listen in ",interval);
-        setInterval(()=> {
-            client.emit('timer', new Date());
-        }, interval)
-    })
-})
+    setInterval(()=> {
+        client.emit('timer', new Date());
+    }, 1000)
+});
 
 io.listen(portSocket);
-console.log('listening on port ', portSocket);
+
+// io.on("connection", (socket)=>{
+//     socket.emit("news", {hello:"world"});
+//     socket.on("first", (data)=>{
+//         console.log(data);
+//     })
+// })
+
+
+console.log('Socket listen a port ', portSocket);
+
+
 
 // curl --url https://localhost:5050/test
 // curl --url https://localhost:5050/test -v
