@@ -5,7 +5,6 @@ const {CreateUser} = require("../../../helper/constructObject")
 
 const authorizations = (req, res, next) => {
     console.log(req.body);
-    // console.log(1);
     if(!req.body.email || !req.body.password){
         return res.sendStatus(400);
     } else {
@@ -18,6 +17,7 @@ const authorizations = (req, res, next) => {
         .select('password')
         .exec((err, user) => {
                 console.log(user);
+                if(!user) return res.status(403).send("nothing user");
 
                 const result = CreateUser(user);
                 console.log("module auditObject", result);

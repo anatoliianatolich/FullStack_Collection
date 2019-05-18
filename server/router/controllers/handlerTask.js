@@ -5,7 +5,7 @@ const addTask = require("../method/task/addTask");
 
 RouterTask
     .get("/", findAllTask)
-    .post("/", addTask)
+    .post("/add", addTask)
     // .put("/", updateTask)
     // .delete("/", deleteTask);
 

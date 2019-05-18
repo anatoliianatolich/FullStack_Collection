@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
         console.log(8);
         res.status(200).send({"info":"Successful", "dataUser":filterUser});
     }
-    else{
+    else if(req.headers.authorization){
         console.log("audit authorization");
         console.log(req.headers.authorization);
         const token = req.headers.authorization.split(' ')[1];
@@ -38,5 +38,11 @@ module.exports = (req, res, next) => {
                 }
             )
         })
+    }
+    else{
+        console.log('HOSTNAME', req.name, req.route);
+        console.log('req WebSocket');
+        res.status(200).send("err pass or email");
+        // next();
     }
 }
