@@ -37,7 +37,7 @@ const server = port => {
         setInterval(()=>{
             console.log("emitsend", new Date());
             socket.emit('news', {user:"connectChat", time: new Date()});
-        },25000)
+        },225000)
         socket.emit('news', {user:"connectChat"});
         socket.on("post", client => {
             console.log("new_visitor", client);

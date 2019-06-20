@@ -34,7 +34,7 @@ module.exports = (req, res, next) => {
                         console.log(1)
                         next();
                     }
-                    else {res.status(200).send("err pass or email")}
+                    else {res.status(200).send("error pass or email")}
                 }
             )
         })
