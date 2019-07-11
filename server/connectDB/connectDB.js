@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const {DB} = require('../config/config');
-mongoose.Promise = global.Promise;
 
-const connect = () => {
+module.exports.connectMongo = () => {
     mongoose.connect(`${DB}`, { useNewUrlParser: true });
     const db = mongoose.connection;
     db.on('error', ()=> {
@@ -13,5 +12,11 @@ const connect = () => {
     });
 }
 
-module.exports = connect;
+module.exports.connectSql = () => {
+    this.connection = mysql.createConnection(sql);
+
+}
+
+
+
 

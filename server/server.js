@@ -30,7 +30,7 @@ const server = port => {
         //     secret:config.sesio
         // }))
         .use(router)
-        .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута як може спрацювати у випадку запиту до бази
+        .use(addError, handlerError); // не зовсім коректна перевірка на відсутність роута яка може спрацювати у випадку запиту до бази
 
     io.on("connection", function(socket) {
         console.log("a user connected");
@@ -53,13 +53,5 @@ const server = port => {
         console.log('url: http//localhost:', port)
     })
 };
-
-
-
-
-
-// curl --url https://localhost:5050/test
-// curl --url https://localhost:5050/test -v
-// curl --url https://localhost:5050/test -v -k
 
 module.exports = server;

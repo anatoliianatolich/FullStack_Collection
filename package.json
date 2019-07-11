@@ -12,7 +12,10 @@
     "jsonwebtoken": "^8.3.0",
     "jwt-simple": "^0.5.5",
     "mongoose": "^5.3.7",
+    "mysql2": "^1.6.5",
     "path": "^0.12.7",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "socket.io": "^2.2.0",
     "waterline": "^0.13.6"
   },
