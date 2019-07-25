@@ -42,7 +42,13 @@ const UserSchema = new Schema({
     task: [{
         type: Schema.Types.ObjectId,
         ref: "Task"
-    }]
+    }],
+    chats: [
+        {
+           id_chat: mongoose.Schema.Types.ObjectId,
+            ref: 'ChatMessageSchema'
+        }
+    ]
 });
 UserSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
