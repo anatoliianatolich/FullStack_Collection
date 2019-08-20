@@ -1,12 +1,12 @@
-const Task = require("../../../connectDB/Schema/tasks");
+const chatMessage = require("../../../connectDB/Schema/chatMessage");
 
 module.exports = (req, res) => {
-    let task = req.body;
-    task.author = req.dataUser._id;
+    let message = req.body;
+    // task.author = req.dataUser._id;
 
-    Task.create(task, (err, data) => {
+    chatMessage.create(message, (err, data) => {
         if(err) return res.status(200).send(err);
         console.log(data);
-        return res.status(200).send(data)
+        return res.status(200).send("add message")
     })
 }
