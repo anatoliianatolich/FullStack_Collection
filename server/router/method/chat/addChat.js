@@ -1,4 +1,4 @@
-const chatMessage = require("../../../connectDB/Schema/chatMessage");
+const ChatMessage = require("../../../connectDB/Schema/chatMessage");
 
 module.exports = (req, res) => {
     let message = req.body;
