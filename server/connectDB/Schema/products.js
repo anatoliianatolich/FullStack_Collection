@@ -32,7 +32,7 @@ const newProduct = new Product({
 
 newProduct.save((err)=> {
     if(err) throw err;
-    console.log('write new product');
+
 });
 
 

@@ -11,12 +11,12 @@ const handlerError = require("./util/handlerError");
 const addError = require("./util/addError");
 
 const log = (req, res, next) => {
-    console.log(req.url, req.method, `${Date.now()}`);
+    // console.log(req.url, req.method, `${Date.now()}`);
     next();
 }
 
 const server = port => {
-    console.log(config);
+
     const corsOptions = {
         origin: 'http://localhost:3000',
         optionsSuccessStatus: 200

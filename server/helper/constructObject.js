@@ -13,6 +13,5 @@ module.exports.DeletePassUser = (user) => {
         let arrAudit = ["name", "email", "token"]
         if (arrAudit.includes(key)) dataUser[key] = user[key];
     }
-    console.log(dataUser)
     return dataUser;
 }

@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
-const taskSchema = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const commentSchema = new Schema({
     author: String,
-    comment: String,
+    comment: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now
@@ -12,4 +14,4 @@ const taskSchema = new Schema({
     update: Boolean,
 });
 
-module.exports = mongoose.model('task', taskSchema);
+module.exports = mongoose.model('comment', commentSchema);
