@@ -7,6 +7,6 @@ const deleteComment = require('../method/comment/deleteComment');
 handlerComment
     .get('/', allComment)
     .post('/', createComment)
-    .delete('/', deleteComment)
+    .delete('/:id', deleteComment)
 
 module.exports = handlerComment;

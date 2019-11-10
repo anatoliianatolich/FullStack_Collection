@@ -16,7 +16,8 @@ module.exports = (req, res, next) => {
     }
     else if(req.headers.authorization){
         console.log("authentificated.js 18");
-        console.log(req.headers);
+        console.log(req.body);
+        
         const token = req.headers.authorization.split(' ')[1];
         JWT.verify(token, secret, (err, decode) => {
             if(err) return res.status(200).send("audit authorization", err);
@@ -38,8 +39,8 @@ module.exports = (req, res, next) => {
     }
     else{
         // console.log('HOSTNAME', req.name, req.route);
-        console.log("this 41")
-        console.log(req.headers);
+        console.log("look at file authentificated.js line 41")
+
 
         res.status(403).send("err pass or email");
         // next();

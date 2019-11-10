@@ -11,7 +11,7 @@ const handlerError = require("./util/handlerError");
 const addError = require("./util/addError");
 
 const log = (req, res, next) => {
-    // console.log(req.url, req.method, `${Date.now()}`);
+    console.log(req.url, req.method, `${Date.now()}`,req.body);
     next();
 }
 

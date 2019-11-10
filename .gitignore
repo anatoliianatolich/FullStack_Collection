@@ -67,3 +67,4 @@ config/
 server/connectDB/conn.js
 layout/
 server/test
+learnreact/
