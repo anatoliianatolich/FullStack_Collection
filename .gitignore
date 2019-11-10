@@ -68,3 +68,4 @@ server/connectDB/conn.js
 layout/
 server/test
 learnreact/
+test/*
