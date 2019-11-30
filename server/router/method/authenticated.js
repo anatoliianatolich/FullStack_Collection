@@ -19,8 +19,10 @@ module.exports = (req, res, next) => {
         console.log(req.body);
         
         const token = req.headers.authorization.split(' ')[1];
+        console.log(token);
         JWT.verify(token, secret, (err, decode) => {
-            if(err) return res.status(200).send("audit authorization", err);
+            if(err) return res.status(403).send("please log in again");
+            console.log("after if");
             const {email, password} = decode;
  
             User.findOne({email: email})
