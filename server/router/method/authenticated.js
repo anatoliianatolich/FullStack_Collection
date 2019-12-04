@@ -16,11 +16,12 @@ module.exports = (req, res, next) => {
     }
     else if(req.headers.authorization){
         console.log("authentificated.js 18");
-        console.log(req.body);
+        // console.log(req.body);
         
-        const token = req.headers.authorization.split(' ')[1];
+        const token = req.headers.authorization.split(' ')[1].trim();
         console.log(token);
         JWT.verify(token, secret, (err, decode) => {
+            console.log(err);
             if(err) return res.status(403).send("please log in again");
             console.log("after if");
             const {email, password} = decode;
