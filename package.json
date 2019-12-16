@@ -11,7 +11,7 @@
     "express-bearer-token": "^2.4.0",
     "jsonwebtoken": "^8.3.0",
     "jwt-simple": "^0.5.5",
-    "mongoose": "^5.3.7",
+    "mongoose": "^5.7.13",
     "mysql2": "^1.6.5",
     "path": "^0.12.7",
     "request": "^2.88.0",
