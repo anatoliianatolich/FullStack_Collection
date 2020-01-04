@@ -4,6 +4,7 @@ const {DeletePassUser} = require("../../helper/constructObject");
 const User = require("../../connectDB/Schema/user");
 
 module.exports = (req, res, next) => {
+    console.log(req.dataUser)
 
     if(req.dataUser){
         console.log("authentificated.js 9");
